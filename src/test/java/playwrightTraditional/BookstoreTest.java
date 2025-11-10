@@ -23,7 +23,7 @@ public class BookstoreTest {
     static void launchBrowser() {
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                .setHeadless(false)); // Set to true for GitHub Actions later
+                .setHeadless(true)); // Set to true for GitHub Actions later
     }
 
     @AfterAll
