@@ -1,4 +1,4 @@
-package playwrightTraditional;
+package playwrightLLM;
 
 // Playwright imports
 import com.microsoft.playwright.*;
