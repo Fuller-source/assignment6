@@ -101,4 +101,32 @@ public class BookstoreTestLLM {
         // Assert that the cart icon shows "1 Items"
         assertThat(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Cart 1 items"))).isVisible();
     }
+
+    @Test
+    void testClothingSearch() {
+        // Navigate to the DePaul bookstore
+        page.navigate("https://depaul.bncollege.com/");
+
+        // Search for "headphones" (similar to earbuds which works)
+        Locator searchBox = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
+        searchBox.fill("headphones");
+        searchBox.press("Enter");
+
+        // Filter by Color "Blue" (different from the earbuds test)
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Color")).click();
+        page.getByRole(AriaRole.LISTITEM)
+                .filter(new Locator.FilterOptions().setHasText("Color Blue"))
+                .locator("svg")
+                .first()
+                .click();
+
+        // Click the first headphones item (similar pattern to earbuds test)
+        page.getByTitle("Skullcandy").first().click();
+
+        // Add 1 to the Cart
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add to cart")).click();
+
+        // Assert that the cart icon shows "1 Items"
+        assertThat(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Cart 1 items"))).isVisible();
+    }
 }
